@@ -2,64 +2,86 @@
 let computerChoices = ['rock', 'paper', 'scissors'];
 let computerRandom = computerChoices[Math.floor(Math.random() * computerChoices.length)]; //Computer chooses random game piece
 
-// Getting user input and switching it to lower case for easy comparrison
+// Setting up game parameters
 
-function playerPlay () {
-    let playerEntry = window.prompt ("Would you like to play Rock, Paper, Scissors vs the Machine?");
-    let playerOption = playerEntry.toLowerCase ();
-    return playerOption;
-}
+let playerScore = 0
+let computerScore = 0
+let roundWinner = ''
+const rockBtn = document.querySelector('.rock');
+const paperBtn = document.querySelector('.paper');
+const scissorBtn = document.querySelector('.scissors');
+const playerChoice = [rockBtn,paperBtn,scissorBtn];
 
-let playerChoice = playerPlay ();
 
+playerChoice.forEach(Option => {
+    Option.addEventListener('click',computerPlay)
+})
 
 // Playing one round
 
 function computerPlay (playerChoice, computerRandom) {
 
     if (playerChoice === computerRandom) {
-        return "It's a tie";
+        roundWinner = 'tie'
     }
     if (playerChoice === 'rock') {
         if (computerRandom === 'scissors') {
-            return "Player wins with rock";
+            playerScore++
+            roundWinner.textContent = 'player'
         }
         else if (computerRandom === 'paper') {
-            return "Computer wins with paper"
+            computerScore++
+            roundWinner.textContent = 'computer'
         }
     }
     if (playerChoice === 'paper') {
         if (computerRandom === 'rock') {
-            return "Player wins with paper";
+            playerScore++
+            roundWinner.textContent = 'player'
         }
         else if (computerRandom === 'scissors') {
-            return "Computer wins with scissors"
+            computerScore++
+            roundWinner.textContent = 'computer'
         }
     }
     if (playerChoice === 'scissors') {
         if (computerRandom === 'paper') {
-            return "Player wins with scissors";
+            playerScore++
+            roundWinner.textContent = 'computer'
+            roundWinner = 'player'
         }
         else if (computerRandom === 'rock') {
-            return "Computer wins with rock"
+            computerScore++
+            roundWinner.textContent = 'computer'
+            roundWinner = 'computer'
         }
     }
-    if (playerChoice != 'rock' && playerChoice != 'paper' && playerChoice != 'scissors') {
-        return `You rebel!!! It's a ROCK, PAPER, SCISSOR game and you played ${playerChoice}`;
-    }
-}
-// Looping game 
-function game () {
-    for (let i = 1; i <=5; i++) {
-        let playerChoice = playerPlay();
-        let computerRandom = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-
-        alert (`Play turn ${i} Player: ${playerChoice} Computer: ${computerRandom}`); computerPlay (i);
-    }
+    
 }
 
-game ();
+
+
+
+
+
+
+//Checking scores
+function isGameOver() {
+    return playerScore === 5 || computerScore ===5
+}
+
+// Looping game, skipping for UI development, but keeping it in for now
+//function game () {
+//    for (let i = 1; i <=5; i++) {
+//        let playerChoice = playerPlay();
+//        let computerRandom = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+ //       alert (`Play turn ${i} Player: ${playerChoice} Computer: ${computerRandom}`); computerPlay (i);
+//    }
+//}
+
+//game ();
 
 
 
