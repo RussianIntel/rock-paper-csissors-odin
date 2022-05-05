@@ -30,8 +30,8 @@ buttons.forEach((button) => {button.addEventListener('click', ()=>{
         else if (playerChoiceId == "paper") {
             playerChoice = 2;
         }
-        let computerRandom = gameOn(compChoice); //Computer chooses random game piece
-        computerPlay ();
+        computerRandom = gameOn(compChoice); //Computer chooses random game piece
+        playGame ();
 return console.log(playerChoice,computerRandom);
     
 })})
@@ -53,33 +53,56 @@ function gameOn(compChoice){
 }
 
 function computerPlay () {
-    let winArray = [[0,2,1],
-                    [1,0,2],
-                    [2,1,0]];
-    let results = winArray[playerChoice][computerRandom];
-    if (results == 0) {
-        roundWinner.textContent = `It's a tie`;
-    }  
-    else if (results == 1) {
-        roundWinner.textContent = `You Won`;
+    if (playerChoice === computerRandom) {
+        roundWinner.textContent = `Tie`;
+    }
+    else if (playerChoice == 0 && computerRandom == 2) {
+        roundWinner.textContent = `You win`;
         playerScore++;
     }
-    else if (results == 2) {
-        roundWinner.textContent = `You Lost`;
+    else if (playerChoice == 1 && computerRandom == 0) {
+        roundWinner.textContent = `You win`;
+        playerScore++;
+    }    
+    else if (playerChoice == 0 && computerRandom == 1) {
+        roundWinner.textContent = `You win`;
+        playerScore++;
+    }
+    else {
+        roundWinner.textContent = `You lost`;
         computerScore++;
     }
 }
 
-
+function playGame(){
+    roundWinner.textContent = "Choose your weapon!";
+    computerPlay();
+    player.textContent = `Player Score: ${playerScore}`;
+    computer.textContent = `Machine Score: ${computerScore}`;
+if (playerScore == 5) {
+    roundWinner.textContent = `You're the champion`;
+    playerScore = 0;
+    computerScore = 0;
+    player.textContent = `Player Score: ${playerScore}`;
+    computer.textContent = `Machine Score: ${computerScore}`;
+}
+else if (computerScore == 5){
+    roundWinner.textContent = `Better luck next time`;
+    playerScore = 0;
+    computerScore = 0;
+    player.textContent = `Player Score: ${playerScore}`;
+    computer.textContent = `Machine Score: ${computerScore}`;
+}
+}
 
 
 
 
 
 //Checking scores
-function isGameOver() {
-    return playerScore === 5 || computerScore ===5
-}
+//function isGameOver() {
+  //  return playerScore === 5 || computerScore ===5
+//}
 
 // Looping game, skipping for UI development, but keeping it in for now
 //function game () {
