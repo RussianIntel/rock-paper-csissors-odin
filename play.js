@@ -10,14 +10,15 @@ let playerScore = 0;
 let computerScore = 0;
 
 const player = document.querySelector("#playerScore");
-player.textContent = `Player Score: ${playerScore}`;
+player.textContent = `${playerScore}`;
 
 const computer = document.querySelector("#computerScore");
-computer.textContent = `Machine Score: ${computerScore}`;
+computer.textContent = `${computerScore}`;
 
 const roundWinner = document.querySelector("#roundWinner");
 roundWinner.textContent = "Game on";
 
+// Adding button listener and initiating game
 
 buttons.forEach((button) => {button.addEventListener('click', ()=>{
     playerChoiceId = button.id;
@@ -32,11 +33,11 @@ buttons.forEach((button) => {button.addEventListener('click', ()=>{
         }
         computerRandom = gameOn(compChoice); //Computer chooses random game piece
         playGame ();
-return console.log(playerChoice,computerRandom);
+//return console.log(playerChoice,computerRandom); was used for testing, left for now just in case
     
 })})
 
-// Playing one round
+// Random computer logic
 
 function gameOn(compChoice){
     let choiceNum = Math.floor(Math.random() * 3);
@@ -51,6 +52,8 @@ function gameOn(compChoice){
     }
     return choiceNum;
 }
+
+// Game logic
 
 function computerPlay () {
     if (playerChoice === computerRandom) {
@@ -74,24 +77,27 @@ function computerPlay () {
     }
 }
 
+//Determening a winner
+
 function playGame(){
     roundWinner.textContent = "Choose your weapon!";
     computerPlay();
-    player.textContent = `Player Score: ${playerScore}`;
-    computer.textContent = `Machine Score: ${computerScore}`;
+    player.textContent = `${playerScore}`;
+    computer.textContent = `${computerScore}`;
 if (playerScore == 5) {
-    roundWinner.textContent = `You're the champion`;
+    //roundWinner.textContent = `You're the champion`;
+    window.alert("You're the winner")
     playerScore = 0;
     computerScore = 0;
-    player.textContent = `Player Score: ${playerScore}`;
-    computer.textContent = `Machine Score: ${computerScore}`;
+    player.textContent = `${playerScore}`;
+    computer.textContent = `${computerScore}`;
 }
 else if (computerScore == 5){
-    roundWinner.textContent = `Better luck next time`;
+    window.alert("Better luck next time")
     playerScore = 0;
     computerScore = 0;
-    player.textContent = `Player Score: ${playerScore}`;
-    computer.textContent = `Machine Score: ${computerScore}`;
+    player.textContent = `${playerScore}`;
+    computer.textContent = `${computerScore}`;
 }
 }
 
